@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title data-i18n="gameTitle">商业大亨：从零开始的富豪之路</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="start-screen" class="fullscreen">
+        <h1 class="game-title">商业大亨：从零开始的富豪之路</h1>
+        <p class="game-description">在这个激动人心的商业模拟游戏中，你将从一无所有开始，通过智慧和策略，成为一位商业巨擘。买卖商品、应对市场变化、提升技能，一步步实现你的富豪梦想！</p>
+        <button id="start-game" class="big-button">开始游戏</button>
+    </div>
+
+    <div id="game-container" style="display: none;">
+        <header>
+            <h1 data-i18n="gameTitle">商业大亨：从零开始的富豪之路</h1>
+            <button id="mobileMenuToggle" class="mobile-only">菜单</button>
+        </header>
+        
+        <nav id="mobileMenu" class="mobile-only">
+            <select id="countrySelect">
+                <option value="CN">中国</option>
+                <option value="US">美国</option>
+            </select>
+            <select id="eraSelect">
+                <option value="modern">现代</option>
+                <option value="industrial">工业革命</option>
+                <option value="medieval">中世纪</option>
+            </select>
+            <button id="pauseButton" data-i18n="pause">暂停</button>
+            <select id="gameSpeed">
+                <option value="1">x1</option>
+                <option value="2">x2</option>
+                <option value="5">x5</option>
+            </select>
+            <button onclick="saveGame()">保存游戏</button>
+            <button onclick="loadGame()">加载游戏</button>
+        </nav>
+
+        <main>
+            <section id="player-info" class="panel">
+                <h2>个人信息</h2>
+                <div class="player-avatar">
+                    <img id="avatar" src="" alt="Player Avatar">
+                    <button id="changeAvatar">更换头像</button>
+                </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">等级:</span>
+                        <span id="player-level" class="info-value">1</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">经验:</span>
+                        <div class="progress-bar"><div id="exp-bar" class="progress-bar-fill"></div></div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">年龄:</span>
+                        <span id="character-age" class="info-value">25</span> 岁
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">资金:</span>
+                        <span id="money" class="info-value">10000</span> 元
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">净资产:</span>
+                        <span id="net-worth" class="info-value">10000</span> 元
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">游戏时间:</span>
+                        <span id="game-time" class="info-value">第1天</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">季节:</span>
+                        <span id="season" class="info-value">春季</span>
+                    </div>
+                </div>
+                <div class="status-bars">
+                    <div class="status-item">
+                        <span class="status-label">健康:</span>
+                        <div class="progress-bar"><div id="health-bar" class="progress-bar-fill"></div></div>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">精力:</span>
+                        <div class="progress-bar"><div id="energy-bar" class="progress-bar-fill"></div></div>
+                    </div>
+                </div>
+                <div id="skills">
+                    <h3>技能</h3>
+                    <div id="skills-list"></div>
+                </div>
+            </section>
+
+            <section id="market" class="panel">
+                <h2>市场行情</h2>
+                <div id="market-prices"></div>
+                <canvas id="priceChart"></canvas>
+                <select id="chartItemSelect"></select>
+            </section>
+
+            <section id="inventory-trade" class="panel">
+                <div id="inventory">
+                    <h2>库存</h2>
+                    <div id="inventory-list"></div>
+                </div>
+                <div id="trade">
+                    <h2>交易</h2>
+                    <div id="trade-controls"></div>
+                </div>
+            </section>
+
+            <section id="events-achievements" class="panel">
+                <div id="events">
+                    <h2>最新事件</h2>
+                    <div id="events-list"></div>
+                </div>
+                <div id="achievements">
+                    <h2>成就</h2>
+                    <ul id="achievements-list"></ul>
+                </div>
+            </section>
+
+            <section id="tasks" class="panel">
+                <h2>任务</h2>
+                <ul id="tasks-list"></ul>
+            </section>
+        </main>
+
+        <footer>
+            <div id="game-log"></div>
+            <div class="game-actions desktop-only">
+                <button onclick="saveGame()">保存游戏</button>
+                <button onclick="loadGame()">加载游戏</button>
+            </div>
+        </footer>
+    </div>
+
+    <div id="tutorial" class="tutorial-overlay" style="display: none;">
+        <div class="tutorial-content">
+            <h2>游戏教程</h2>
+            <p id="tutorial-text"></p>
+            <button id="tutorial-next">下一步</button>
+            <button id="tutorial-close">关闭教程</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
